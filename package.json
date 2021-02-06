@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node bin/www"
+    "start": "ts-node bin/www",
+    "lint": "eslint --ext .ts . --fix"
   },
   "repository": {
     "type": "git",

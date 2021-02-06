@@ -7,7 +7,7 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.get('/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id } = req.params
   res.json({ message: `Get crime by id ${id}` })
 })
 
