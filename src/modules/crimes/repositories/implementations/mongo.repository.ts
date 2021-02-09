@@ -6,7 +6,8 @@ export class MongoCrimeRepository implements ICrimeRepository {
   getAll (): Promise<Crime[]> {
     return Promise.resolve([
       { title: 'Crimen A' },
-      { title: 'Crimen B' }
+      { title: 'Crimen B' },
+      { title: 'Crimen C' }
     ])
   }
 
