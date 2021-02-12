@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { crimesRouter } from '../modules/crimes/routes'
+import { crimesRouter } from './routes/crime'
 
 const v1Router = Router()
 
