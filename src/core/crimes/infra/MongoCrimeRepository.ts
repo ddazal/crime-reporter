@@ -5,7 +5,8 @@ export class MongoCrimeRepository implements CrimeRepository {
   find (): Promise<Crime[]> {
     return Promise.resolve([
       { description: 'Lorem ipsum dolore sit amet', type: 'A' },
-      { description: 'Lorem ipsum dolore sit amet', type: 'B' }
+      { description: 'Lorem ipsum dolore sit amet', type: 'B' },
+      { description: 'Lorem ipsum dolore sit amet', type: 'C' }
     ])
   }
 

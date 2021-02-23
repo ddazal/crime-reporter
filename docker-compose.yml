@@ -1,14 +1,8 @@
-############################################################
-# Docker compose file for configuring the node.js - Express API
-############################################################
-
-version: '3'
+version: '3.8'
 
 services:
-  nodejs:
+  api:
     build: .
-    image: nodejs
-    container_name: nodejs
     restart: unless-stopped
     env_file: .env
     environment:
@@ -20,15 +14,13 @@ services:
     ports:
       - "3030:3030"
     volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+      - .:/usr/src/app
     networks:
       - app-network
-    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon app.js
+    command: ./wait-for.sh db:27017 -- npm run dev
 
   db:
-    image: mongo:4.1.8-xenial
-    container_name: db
+    image: mongo:4-bionic
     restart: unless-stopped
     env_file: .env
     environment:
@@ -41,8 +33,6 @@ services:
 
 networks:
   app-network:
-    driver: bridge
 
 volumes:
   dbdata:
-  node_modules:

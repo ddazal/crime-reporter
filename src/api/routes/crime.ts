@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import { CrimeService } from '../../modules/crimes/application'
-import { MongoCrimeRepository } from '../../modules/crimes/infra/MongoCrimeRepository'
+import { CrimeService } from '../../core/crimes/application'
+import { MongoCrimeRepository } from '../../core/crimes/infra/MongoCrimeRepository'
 
 const router = Router()
 const repo = new MongoCrimeRepository()
