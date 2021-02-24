@@ -1,20 +1,6 @@
-import { Crime } from '../domain/crime'
-import { CrimeRepository } from '../domain/crime.repository'
+import { CrimeService } from './service'
+import { MongoCrimeRepository } from '../infra/MongoCrimeRepository'
 
-export class CrimeService {
-  private repo: CrimeRepository
+const service = new CrimeService(new MongoCrimeRepository())
 
-  constructor (repo: CrimeRepository) {
-    this.repo = repo
-  }
-
-  async find (): Promise<Crime[]> {
-    const crimes = await this.repo.find()
-    return crimes
-  }
-
-  async findById (id: string): Promise<Crime> {
-    const crime = await this.repo.findById(id)
-    return crime
-  }
-}
+export { service as crimeService }

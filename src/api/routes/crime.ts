@@ -1,18 +1,15 @@
 import { Router, Request, Response } from 'express'
-import { CrimeService } from '../../core/crimes/application'
-import { MongoCrimeRepository } from '../../core/crimes/infra/MongoCrimeRepository'
+import { crimeService } from '../../core/crimes/application/'
 
 const router = Router()
-const repo = new MongoCrimeRepository()
-const service = new CrimeService(repo)
 
 router.get('/', async (req: Request, res: Response) => {
-  const crimes = await service.find()
+  const crimes = await crimeService.find()
   res.json(crimes)
 })
 
 router.get('/:id', async (req: Request, res: Response) => {
-  const crime = await service.findById(req.params.id)
+  const crime = await crimeService.findById(req.params.id)
   res.json(crime)
 })
 

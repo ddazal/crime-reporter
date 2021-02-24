@@ -1,16 +1,17 @@
 import { Crime } from '../domain/crime'
 import { CrimeRepository } from '../domain/crime.repository'
+import { MongoRepository } from '../../../shared/infra/mongodb/'
+import { ObjectId } from 'mongodb'
 
-export class MongoCrimeRepository implements CrimeRepository {
-  find (): Promise<Crime[]> {
-    return Promise.resolve([
-      { description: 'Lorem ipsum dolore sit amet', type: 'A' },
-      { description: 'Lorem ipsum dolore sit amet', type: 'B' },
-      { description: 'Lorem ipsum dolore sit amet', type: 'C' }
-    ])
+export class MongoCrimeRepository extends MongoRepository implements CrimeRepository {
+  async find (): Promise<Crime[]> {
+    const db = await this.getDb()
+    return db.collection('crimes').find({}).toArray()
   }
 
-  findById (id: string): Promise<Crime> {
-    return Promise.resolve({ description: 'Lorem ipsum dolore sit amet', type: 'B' })
+  async findById (id: string): Promise<Crime> {
+    const db = await this.getDb()
+    const crime = db.collection('crimes').findOne({ _id: new ObjectId(id) })
+    return crime || {}
   }
 }
