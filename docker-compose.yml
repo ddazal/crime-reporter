@@ -5,10 +5,11 @@ services:
     build: .
     restart: unless-stopped
     container_name: crime-reporter-api
+    env_file: .env
     environment:
-      - DB_HOST=db
-      - DB_PORT=27017
-      - DB_NAME=wcds
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - DB_NAME=$DB_NAME
     ports:
       - "3030:3030"
     volumes:
