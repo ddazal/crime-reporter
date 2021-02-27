@@ -1,23 +1,22 @@
-import { Db, MongoClient } from 'mongodb'
+/* eslint-disable import/first */
+require('dotenv').config()
 
-const { DB_HOST, DB_PORT, DB_NAME } = process.env
-
-const uri = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`
+import { Db } from 'mongodb'
+import { MongoLib } from '../../src/shared/infra/mongodb'
 
 async function listCollections (db: Db) {
   const collections = await db.collections()
   return collections.map(c => c.collectionName)
 }
 
-;(async () => {
+; (async () => {
   try {
-    const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    console.log('Connected to database', client.isConnected())
-
-    const db = client.db(DB_NAME)
+    const repository = new MongoLib()
+    const db = await repository.getDb()
     const collections = await listCollections(db)
+
     if (collections.includes('crimes')) {
-      return client.close()
+      return repository.client.close()
     }
 
     const result = await db.collection('crimes').insertMany([
@@ -31,7 +30,7 @@ async function listCollections (db: Db) {
       }
     ])
     console.log('Inserted ' + result.insertedCount + ' new documents')
-    client.close()
+    repository.client.close()
   } catch (error) {
     console.log(error.message)
     process.exit(1)
