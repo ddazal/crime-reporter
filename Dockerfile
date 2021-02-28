@@ -18,4 +18,6 @@ CMD [ “npm”, “start” ]
 
 FROM base as development
 
+RUN npm run seed
+
 CMD [ "npm", "run", "dev" ]
