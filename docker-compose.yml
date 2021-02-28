@@ -2,7 +2,11 @@ version: '3.8'
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      target: development
+    depends_on: 
+      - db
     restart: unless-stopped
     container_name: crime-reporter-api
     environment:
@@ -15,7 +19,6 @@ services:
       - .:/usr/src/app
     networks:
       - app-network
-    command: ./wait-for.sh db:27017 -- npm run dev
 
   db:
     image: mongo:4-bionic
