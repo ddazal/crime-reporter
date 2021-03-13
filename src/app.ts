@@ -7,7 +7,7 @@ app.use('/api/v1', v1Router)
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
-    message: 'API works!'
+    crimes: `${req.baseUrl}/api/v1/crimes`
   })
 })
 
