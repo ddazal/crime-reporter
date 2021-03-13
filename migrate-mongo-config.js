@@ -1,7 +1,7 @@
 // In this file you can configure migrate-mongo
 require('dotenv').config()
 
-const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_LOCAL } = process.env
+const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } = process.env
 
 const config = {
   mongodb: {

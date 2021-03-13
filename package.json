@@ -7,7 +7,7 @@
     "build": "rimraf ./build && tsc",
     "seed": "ts-node ./config/mongo/seed",
     "dev": "nodemon",
-    "lint": "eslint --ext .ts . --fix",
+    "lint": "eslint --ext .ts,.js . --fix",
     "prebuild": "npm run lint",
     "prestart": "npm run build",
     "start": "node build/index.js"

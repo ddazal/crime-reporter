@@ -1,11 +1,11 @@
 module.exports = {
-  async up(db, client) {
+  async up (db, client) {
     return db.createCollection('crimetypes', {
       name: String
     })
   },
 
-  async down(db, client) {
+  async down (db, client) {
     return db.dropCollection('crimetypes')
   }
-};
+}

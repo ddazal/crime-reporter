@@ -1,5 +1,5 @@
 module.exports = {
-  async up(db, client) {
+  async up (db, client) {
     return db.createCollection('crimes', {
       description: String,
       registeredDate: Date,
@@ -12,7 +12,7 @@ module.exports = {
     })
   },
 
-  async down(db, client) {
+  async down (db, client) {
     return db.dropCollection('crimes')
   }
-};
+}
