@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 require('dotenv').config()
 
+import 'reflect-metadata'
 import http from 'http'
 import { app } from './app'
 

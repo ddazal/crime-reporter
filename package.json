@@ -10,7 +10,9 @@
     "lint": "eslint --ext .ts,.js . --fix",
     "prebuild": "npm run lint",
     "prestart": "npm run build",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "migrate:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migrate:down": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   },
   "repository": {
     "type": "git",
@@ -31,7 +33,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "migrate-mongo": "^8.2.2",
-    "mongodb": "^3.6.4"
+    "mongodb": "^3.6.4",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.31"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
