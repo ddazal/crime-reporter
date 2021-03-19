@@ -1,4 +1,5 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
+import { Column, Entity, ObjectID, ObjectIdColumn, OneToMany } from 'typeorm'
+import { Subdivision } from '../../subdivisions/domain/Subdivision'
 
 @Entity()
 export class Country {
@@ -10,6 +11,9 @@ export class Country {
 
   @Column()
   code: string;
+
+  @OneToMany(() => Subdivision, subdivision => subdivision.country)
+  subdivisions!: Subdivision[]
 
   private constructor (name: string, code: string) {
     this.name = name

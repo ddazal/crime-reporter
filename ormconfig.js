@@ -12,5 +12,9 @@ module.exports = {
   ssl: true,
   cli: {
     migrationsDir: 'migrations'
-  }
+  },
+  entities: [
+    'src/core/countries/domain/Country.ts',
+    'src/core/subdivisions/domain/Subdivision.ts'
+  ]
 }
