@@ -14,7 +14,6 @@ module.exports = {
     migrationsDir: 'migrations'
   },
   entities: [
-    'src/core/countries/domain/Country.ts',
-    'src/core/subdivisions/domain/Subdivision.ts'
+    'src/core/**/domain/**.ts'
   ]
 }

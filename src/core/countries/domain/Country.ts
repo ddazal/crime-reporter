@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn, OneToMany } from 'typeorm'
 import { Subdivision } from '../../subdivisions/domain/Subdivision'
 
-@Entity()
+@Entity('countries')
 export class Country {
   @ObjectIdColumn()
   id!: ObjectID;

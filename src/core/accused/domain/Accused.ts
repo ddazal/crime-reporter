@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, ObjectID, ObjectIdColumn } from 'typeorm'
 import { Subdivision } from '../../subdivisions/domain/Subdivision'
 
-@Entity()
+@Entity('accused')
 export class Accused {
   @ObjectIdColumn()
   id!: ObjectID
