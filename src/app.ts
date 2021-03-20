@@ -6,8 +6,10 @@ const app = express()
 app.use('/api/v1', v1Router)
 
 app.get('/', (req: Request, res: Response) => {
+  const baseUrl = `${req.baseUrl}/api/v1`
   res.status(200).json({
-    crimes: `${req.baseUrl}/api/v1/crimes`
+    crimes: `${baseUrl}/crimes`,
+    countries: `${baseUrl}/countries`
   })
 })
 
