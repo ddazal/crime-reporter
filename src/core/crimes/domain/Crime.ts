@@ -1,5 +1,14 @@
+import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
+
+@Entity()
 export class Crime {
+  @ObjectIdColumn()
+  id!: ObjectID
+
+  @Column()
   description: string
+
+  @Column()
   type: string
 
   private constructor (description: string, type: string) {

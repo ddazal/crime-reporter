@@ -32,7 +32,7 @@ export class Accused {
     return new Accused(firstName, lastName, gender, birthDate)
   }
 
-  get fullName () {
+  get getFullName () {
     return `${this.firstName} ${this.lastName}`.trim()
   }
 }

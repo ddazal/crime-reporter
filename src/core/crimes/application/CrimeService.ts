@@ -8,13 +8,13 @@ export class CrimeService {
     this.repository = repository
   }
 
-  async find (): Promise<Crime[]> {
-    const crimes = await this.repository.find()
+  async getAll (): Promise<Crime[]> {
+    const crimes = await this.repository.getAll()
     return crimes
   }
 
-  async findById (id: string): Promise<Crime> {
-    const crime = await this.repository.findById(id)
+  async findById (id: string): Promise<Crime | undefined> {
+    const crime = await this.repository.getById(id)
     return crime
   }
 }

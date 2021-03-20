@@ -1,17 +1,15 @@
+import { getRepository } from 'typeorm'
 import { Crime } from '../domain/Crime'
 import { ICrimeRepository } from '../domain/ICrimeRepository'
-import { MongoLib } from '../../../shared/infra/mongodb/'
-import { ObjectId } from 'mongodb'
 
-export class MongoCrimeRepository extends MongoLib implements ICrimeRepository {
-  async find (): Promise<Crime[]> {
-    const db = await this.getDb()
-    return db.collection('crimes').find({}).toArray()
+export class MongoCrimeRepository implements ICrimeRepository {
+  async getAll (): Promise<Crime[]> {
+    const crimes = await getRepository(Crime).find()
+    return crimes
   }
 
-  async findById (id: string): Promise<Crime> {
-    const db = await this.getDb()
-    const crime = db.collection('crimes').findOne({ _id: new ObjectId(id) })
-    return crime || {}
+  async getById (id: string): Promise<Crime | undefined> {
+    const crime = await getRepository(Crime).findOne({ id })
+    return crime
   }
 }

@@ -1,4 +1,4 @@
-import { CrimeService } from './service'
+import { CrimeService } from './CrimeService'
 import { MongoCrimeRepository } from '../infra/MongoCrimeRepository'
 
 const service = new CrimeService(new MongoCrimeRepository())

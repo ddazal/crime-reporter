@@ -4,7 +4,7 @@ import { crimeService } from '../../core/crimes/application/'
 const router = Router()
 
 router.get('/', async (req: Request, res: Response) => {
-  const crimes = await crimeService.find()
+  const crimes = await crimeService.getAll()
   res.json(crimes)
 })
 
