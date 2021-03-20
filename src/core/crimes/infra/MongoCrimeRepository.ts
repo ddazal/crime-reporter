@@ -1,9 +1,9 @@
-import { Crime } from '../domain/crime'
-import { CrimeRepository } from '../domain/crime.repository'
+import { Crime } from '../domain/Crime'
+import { ICrimeRepository } from '../domain/ICrimeRepository'
 import { MongoLib } from '../../../shared/infra/mongodb/'
 import { ObjectId } from 'mongodb'
 
-export class MongoCrimeRepository extends MongoLib implements CrimeRepository {
+export class MongoCrimeRepository extends MongoLib implements ICrimeRepository {
   async find (): Promise<Crime[]> {
     const db = await this.getDb()
     return db.collection('crimes').find({}).toArray()

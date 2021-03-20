@@ -1,10 +1,10 @@
-import { Crime } from '../domain/crime'
-import { CrimeRepository } from '../domain/crime.repository'
+import { Crime } from '../domain/Crime'
+import { ICrimeRepository } from '../domain/ICrimeRepository'
 
 export class CrimeService {
-  private repository: CrimeRepository
+  private repository: ICrimeRepository
 
-  constructor (repository: CrimeRepository) {
+  constructor (repository: ICrimeRepository) {
     this.repository = repository
   }
 

@@ -1,6 +1,6 @@
-import { Crime } from './crime'
+import { Crime } from './Crime'
 
-export interface CrimeRepository {
+export interface ICrimeRepository {
   find(): Promise<Crime[]>
   findById(id: string): Promise<Crime>
 }
