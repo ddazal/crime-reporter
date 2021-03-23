@@ -1,4 +1,5 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
+import { Column, Entity, ManyToMany, ObjectID, ObjectIdColumn } from 'typeorm'
+import { CrimeType } from '../../crime-types/domain/CrimeType'
 
 @Entity('crimes')
 export class Crime {
@@ -8,15 +9,15 @@ export class Crime {
   @Column()
   description: string
 
-  @Column()
-  type: string
+  @ManyToMany(types => CrimeType)
+  types: CrimeType[];
 
-  private constructor (description: string, type: string) {
+  private constructor (description: string, types: CrimeType[]) {
     this.description = description
-    this.type = type
+    this.types = types
   }
 
-  static create (description: string, type: string) {
-    return new Crime(description, type)
+  static create (description: string, types: CrimeType[]) {
+    return new Crime(description, types)
   }
 }

@@ -1,4 +1,4 @@
-import { Entity, ObjectIdColumn, Column, ObjectID, ManyToOne } from 'typeorm'
+import { Entity, Index, ObjectIdColumn, Column, ObjectID, ManyToOne } from 'typeorm'
 import { Country } from '../../countries/domain/Country'
 
 @Entity('subdivisions')
@@ -9,6 +9,7 @@ export class Subdivision {
   @Column()
   name: string
 
+  @Index()
   @Column()
   code: string
 

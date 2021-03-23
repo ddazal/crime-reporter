@@ -9,12 +9,10 @@ export class CrimeService {
   }
 
   async getAll (): Promise<Crime[]> {
-    const crimes = await this.repository.getAll()
-    return crimes
+    return await this.repository.getAll()
   }
 
   async findById (id: string): Promise<Crime | undefined> {
-    const crime = await this.repository.getById(id)
-    return crime
+    return await this.repository.getById(id)
   }
 }
