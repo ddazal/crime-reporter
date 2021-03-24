@@ -12,7 +12,7 @@ export class AccusedService {
     return await this.repository.getAll()
   }
 
-  async getByCode (code: string): Promise<Accused | undefined> {
-    return await this.repository.getByCode(code)
+  async getByName (name: string): Promise<Accused | undefined> {
+    return await this.repository.getByName(name)
   }
 }

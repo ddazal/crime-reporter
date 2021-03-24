@@ -7,7 +7,7 @@ export class MongoAccusedRepository implements IAccusedRepository {
     return await getRepository(Accused).find()
   }
 
-  async getByCode (code: string): Promise<Accused | undefined> {
-    return await getRepository(Accused).findOne(code)
+  async getByName (name: string): Promise<Accused | undefined> {
+    return await getRepository(Accused).findOne({ firstName: name })
   }
 }
