@@ -1,6 +1,6 @@
 import { SubdivisionService } from './SubdivisionService'
-import { MongoSubdivisionRepository } from '../infra/MongoSubdivisionRepository'
+import { SubdivisionRepository } from '../infra/SubdivisionRepository'
 
-const service = new SubdivisionService(new MongoSubdivisionRepository())
+const service = new SubdivisionService(new SubdivisionRepository())
 
 export { service as subdivisionService }

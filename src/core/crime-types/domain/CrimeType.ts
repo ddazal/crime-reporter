@@ -11,7 +11,7 @@ export class CrimeType {
 
   @ManyToMany(crimes => Crime)
   @JoinTable()
-  crimes: Crime[] = [];
+  crimes!: Crime[];
 
   private constructor (name: string) {
     this.name = name

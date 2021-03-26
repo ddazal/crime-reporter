@@ -12,7 +12,7 @@ export class SubdivisionService {
     return await this.repository.getAll()
   }
 
-  async findById (id: string): Promise<Subdivision | undefined> {
+  async getById (id: string): Promise<Subdivision | undefined> {
     return await this.repository.getById(id)
   }
 }

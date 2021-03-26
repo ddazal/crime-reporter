@@ -5,13 +5,13 @@ const router = Router()
 
 router.get('/', async (req: Request, res: Response) => {
   const countries = await countryService.getAll()
-  res.json(countries)
+  res.json({ data: countries })
 })
 
 router.get('/:code', async (req: Request, res: Response) => {
   const { code } = req.params
-  const country = await countryService.getByCode(code)
-  res.json(country)
+  const country = await countryService.getByCode(code.toUpperCase())
+  res.json({ data: country || null })
 })
 
 export { router as countriesRouter }

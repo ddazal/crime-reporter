@@ -1,6 +1,6 @@
 import { AccusedService } from './AccusedService'
-import { MongoAccusedRepository } from '../infra/MongoAccusedRepository'
+import { AccusedRepository } from '../infra/AccusedRepository'
 
-const service = new AccusedService(new MongoAccusedRepository())
+const service = new AccusedService(new AccusedRepository())
 
 export { service as accusedService }

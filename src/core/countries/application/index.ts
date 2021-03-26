@@ -1,6 +1,6 @@
 import { CountryService } from './CountryService'
-import { MongoCountryRepository } from '../infra/MongoCountryRepository'
+import { CountryRepository } from '../infra/CountryRepository'
 
-const service = new CountryService(new MongoCountryRepository())
+const service = new CountryService(new CountryRepository())
 
 export { service as countryService }
