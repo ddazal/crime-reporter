@@ -9,12 +9,10 @@ export class CountryService {
   }
 
   async getAll (): Promise<Country[]> {
-    const countries = await this.repository.getAll()
-    return countries
+    return await this.repository.getAll()
   }
 
   async getByCode (code: string): Promise<Country | undefined> {
-    const country = await this.repository.getByCode(code)
-    return country
+    return await this.repository.getByCode(code)
   }
 }

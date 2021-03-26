@@ -4,12 +4,10 @@ import { ICountryRepository } from '../domain/ICountryRepository'
 
 export class MongoCountryRepository implements ICountryRepository {
   async getAll (): Promise<Country[]> {
-    const countries = await getRepository(Country).find()
-    return countries
+    return await getRepository(Country).find()
   }
 
   async getByCode (code: string): Promise<Country | undefined> {
-    const country = await getRepository(Country).findOne({ code })
-    return country
+    return await getRepository(Country).findOne({ code })
   }
 }
