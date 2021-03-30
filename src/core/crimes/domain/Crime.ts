@@ -25,8 +25,8 @@ export class Crime {
   @ManyToMany(types => CrimeType)
   types: CrimeType[];
 
-  private constructor (accuseds: Accused[], description: string, types: CrimeType[]) {
-    this.accused = accuseds
+  private constructor (accused: Accused[], description: string, types: CrimeType[]) {
+    this.accused = accused
     this.description = description
     this.types = types
   }
