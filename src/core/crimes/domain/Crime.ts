@@ -19,19 +19,19 @@ export class Crime {
   @Column()
   lng!: string
 
-  @ManyToMany(accuseds => Accused)
-  accuseds: Accused[];
+  @ManyToMany(accused => Accused)
+  accused: Accused[];
 
   @ManyToMany(types => CrimeType)
   types: CrimeType[];
 
   private constructor (accuseds: Accused[], description: string, types: CrimeType[]) {
-    this.accuseds = accuseds
+    this.accused = accuseds
     this.description = description
     this.types = types
   }
 
-  static create (accuseds: Accused[], description: string, types: CrimeType[]) {
-    return new Crime(accuseds, description, types)
+  static create (accused: Accused[], description: string, types: CrimeType[]) {
+    return new Crime(accused, description, types)
   }
 }
