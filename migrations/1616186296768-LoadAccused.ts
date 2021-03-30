@@ -16,8 +16,8 @@ export class LoadAccused1616186296768 implements MigrationInterface {
       }
 
       const { firstName, lastName, gender, birthDate } = person
-      const doc = Accused.create(firstName, lastName, gender, birthDate)
-      doc.birthPlace = subdivisionsMap.get(subdivisionCode)
+      const birthPlace = subdivisionsMap.get(subdivisionCode)
+      const doc = Accused.create(firstName, lastName, gender, birthDate, birthPlace)
       const result = await queryRunner.insertOne('accused', doc)
       console.log(`Inserted id: ${result.insertedId}`)
     }

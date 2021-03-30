@@ -17,11 +17,12 @@ export class LoadSubdivisions1616122740820 implements MigrationInterface {
         countriesMap.set(countryCode, country)
       }
 
-      const doc = Subdivision.create(subdivision.name, subdivision.code.toString(), subdivision.level)
-      doc.country = countriesMap.get(countryCode)
+      const country = countriesMap.get(countryCode)
+      const doc = Subdivision.create(subdivision.name, subdivision.code.toString(), subdivision.level, country)
       const result = await queryRunner.insertOne('subdivisions', doc)
       console.log(`Inserted id: ${result.insertedId}`)
     }
+    await queryRunner.createCollectionIndex('subdivisions', { code: 1 })
   }
 
   public async down (queryRunner: MongoQueryRunner): Promise<void> {

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, ObjectID, ObjectIdColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, ManyToOne, ObjectID, ObjectIdColumn } from 'typeorm'
 import { Subdivision } from '../../subdivisions/domain/Subdivision'
 
 @Entity('accused')
@@ -19,17 +19,19 @@ export class Accused {
   birthDate: string
 
   @ManyToOne(() => Subdivision)
-  birthPlace!: Subdivision
+  @JoinColumn()
+  birthPlace: Subdivision
 
-  private constructor (firstName: string, lastName: string, gender: string, birthDate: string) {
+  private constructor (firstName: string, lastName: string, gender: string, birthDate: string, birthPlace: Subdivision) {
     this.firstName = firstName
     this.lastName = lastName
     this.gender = gender
     this.birthDate = birthDate
+    this.birthPlace = birthPlace
   }
 
-  static create (firstName: string, lastName: string, gender: string, birthDate: string) {
-    return new Accused(firstName, lastName, gender, birthDate)
+  static create (firstName: string, lastName: string, gender: string, birthDate: string, birthPlace: Subdivision) {
+    return new Accused(firstName, lastName, gender, birthDate, birthPlace)
   }
 
   get getFullName () {

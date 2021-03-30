@@ -7,6 +7,7 @@ export class LoadCountries1616042519525 implements MigrationInterface {
   public async up (queryRunner: MongoQueryRunner): Promise<void> {
     const countriesData = countries.map(country => Country.create(country.name, country.code))
     const result = await queryRunner.insertMany('countries', countriesData)
+    await queryRunner.createCollectionIndex('countries', { code: 1 })
     console.log(`${result.insertedCount} documents inserted.`)
   }
 

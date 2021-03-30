@@ -1,4 +1,4 @@
-import { Entity, Index, ObjectIdColumn, Column, ObjectID, ManyToOne } from 'typeorm'
+import { Entity, ObjectIdColumn, Column, ObjectID, ManyToOne, JoinColumn } from 'typeorm'
 import { Country } from '../../countries/domain/Country'
 
 @Entity('subdivisions')
@@ -9,23 +9,24 @@ export class Subdivision {
   @Column()
   name: string
 
-  @Index()
   @Column()
   code: string
 
   @Column()
   level: string
 
-  @ManyToOne(() => Country, country => country.subdivisions)
-  country!: Country;
+  @ManyToOne(() => Country)
+  @JoinColumn()
+  country: Country;
 
-  private constructor (name: string, code: string, level: string) {
+  private constructor (name: string, code: string, level: string, country: Country) {
     this.name = name
     this.code = code
     this.level = level
+    this.country = country
   }
 
-  static create (name: string, code: string, level: string) {
-    return new Subdivision(name, code, level)
+  static create (name: string, code: string, level: string, country: Country) {
+    return new Subdivision(name, code, level, country)
   }
 }
