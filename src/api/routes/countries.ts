@@ -14,4 +14,10 @@ router.get('/:code', async (req: Request, res: Response) => {
   res.json({ data: country || null })
 })
 
+router.get('/:code/subdivisions', async (req: Request, res: Response) => {
+  const { code } = req.params
+  const subdivisions = await countryService.getSubdivisions(code.toUpperCase())
+  res.json({ data: subdivisions })
+})
+
 export { router as countriesRouter }

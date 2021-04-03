@@ -11,7 +11,8 @@ app.get('/', (req: Request, res: Response) => {
     crimes: getRelativeURL(baseUrl, 'crimes'),
     countries: getRelativeURL(baseUrl, 'countries'),
     accused: getRelativeURL(baseUrl, 'accused'),
-    subdivisions: getRelativeURL(baseUrl, 'subdivisions')
+    subdivisions: getRelativeURL(baseUrl, 'subdivisions'),
+    types: getRelativeURL(baseUrl, 'types')
   })
 })
 

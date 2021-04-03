@@ -11,8 +11,4 @@ export class CrimeTypeService {
   async getAll (): Promise<CrimeType[]> {
     return await this.repository.getAll()
   }
-
-  async getByCode (code: string): Promise<CrimeType | undefined> {
-    return await this.repository.getByCode(code)
-  }
 }

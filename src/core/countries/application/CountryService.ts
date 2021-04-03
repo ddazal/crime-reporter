@@ -1,3 +1,4 @@
+import { Subdivision } from '../../subdivisions/domain/Subdivision'
 import { Country } from '../domain/Country'
 import { ICountryRepository } from '../domain/ICountryRepository'
 
@@ -14,5 +15,9 @@ export class CountryService {
 
   async getByCode (code: string): Promise<Country | undefined> {
     return await this.repository.getByCode(code)
+  }
+
+  async getSubdivisions (code: string): Promise<Subdivision[]> {
+    return await this.repository.getSubdivisions(code)
   }
 }
