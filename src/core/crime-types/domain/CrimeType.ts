@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn, ManyToMany, JoinTable } from 'typeorm'
 import { Crime } from '../../crimes/domain/Crime'
 
-@Entity('countries')
+@Entity('crimetypes')
 export class CrimeType {
   @ObjectIdColumn()
   id!: ObjectID;
