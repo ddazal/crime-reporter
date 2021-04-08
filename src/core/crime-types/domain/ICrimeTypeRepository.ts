@@ -2,5 +2,5 @@ import { CrimeType } from './CrimeType'
 
 export interface ICrimeTypeRepository {
   getAll(): Promise<CrimeType[]>
-  getOne(): Promise<CrimeType | undefined>
+  getMany(): Promise<CrimeType[] | []>
 }
