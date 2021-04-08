@@ -19,7 +19,7 @@ export class AccusedService {
     return await this.repository.getById(id)
   }
 
-  async getMany (): Promise<Accused[] | []> {
+  async getMany (): Promise<Accused[]> {
     return await this.repository.getMany()
   }
 }

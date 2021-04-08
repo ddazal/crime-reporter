@@ -1,13 +1,13 @@
-import { getRepository } from 'typeorm'
+import { getMongoRepository, MongoRepository } from 'typeorm'
 import { Crime } from '../domain/Crime'
 import { ICrimeRepository } from '../domain/ICrimeRepository'
 
-export class MongoCrimeRepository implements ICrimeRepository {
+export class MongoCrimeRepository extends MongoRepository<Crime> implements ICrimeRepository {
   async getAll (): Promise<Crime[]> {
-    return await getRepository(Crime).find()
+    return await getMongoRepository(Crime).find()
   }
 
   async getById (id: string): Promise<Crime | undefined> {
-    return await getRepository(Crime).findOne({ id })
+    return await getMongoRepository(Crime).findOne(id)
   }
 }

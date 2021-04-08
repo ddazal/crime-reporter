@@ -12,7 +12,7 @@ export class CrimeTypeService {
     return await this.repository.getAll()
   }
 
-  async getMany (): Promise<CrimeType[] | []> {
+  async getMany (): Promise<CrimeType[]> {
     return await this.repository.getMany()
   }
 }
