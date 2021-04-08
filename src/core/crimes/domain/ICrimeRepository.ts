@@ -1,6 +1,6 @@
 import { Crime } from './Crime'
 
 export interface ICrimeRepository {
-  getAll(): Promise<Crime[]>
+  getAll(page: number): Promise<Crime[]>
   getById(id: string): Promise<Crime | undefined>
 }

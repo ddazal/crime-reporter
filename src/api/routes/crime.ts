@@ -1,10 +1,12 @@
 import { Router, Request, Response } from 'express'
 import { crimeService } from '../../core/crimes/application/'
+import { getParams } from '../params'
 
 const router = Router()
 
-router.get('/', async (req: Request, res: Response) => {
-  const crimes = await crimeService.getAll()
+router.get('/', getParams, async (req: Request, res: Response) => {
+  const { locals } = res
+  const crimes = await crimeService.getAll(locals.pagination.nPage)
   res.json({ data: crimes })
 })
 

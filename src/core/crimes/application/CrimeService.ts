@@ -8,8 +8,8 @@ export class CrimeService {
     this.repository = repository
   }
 
-  async getAll (): Promise<Crime[]> {
-    return await this.repository.getAll()
+  async getAll (page: number): Promise<Crime[]> {
+    return await this.repository.getAll(page)
   }
 
   async findById (id: string): Promise<Crime | undefined> {
