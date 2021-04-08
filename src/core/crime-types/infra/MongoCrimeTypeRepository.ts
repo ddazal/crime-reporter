@@ -7,7 +7,11 @@ export class MongoCrimeTypeRepository implements ICrimeTypeRepository {
     return await getRepository(CrimeType).find()
   }
 
-  async getByName (name: string): Promise<CrimeType | undefined> {
-    return await getRepository(CrimeType).findOne(name)
+  async getByCode (code: string): Promise<CrimeType | undefined> {
+    return await getRepository(CrimeType).findOne(code)
+  }
+
+  async getOne (): Promise<CrimeType | undefined> {
+    return await getRepository(CrimeType).findOne()
   }
 }

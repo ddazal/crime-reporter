@@ -10,4 +10,8 @@ export class AccusedRepository extends Repository<Accused> implements IAccusedRe
   async getById (id: string): Promise<Accused | undefined> {
     return await getRepository(Accused).findOne(id)
   }
+
+  async getOne (): Promise<Accused | undefined> {
+    return await getRepository(Accused).findOne()
+  }
 }

@@ -25,13 +25,16 @@ export class Crime {
   @ManyToMany(types => CrimeType)
   types: CrimeType[];
 
-  private constructor (accused: Accused[], description: string, types: CrimeType[]) {
+  private constructor (accused: Accused[], description: string, occuredDate: Date, lat: string, lng: string, types: CrimeType[]) {
     this.accused = accused
     this.description = description
+    this.occuredDate = occuredDate
+    this.lat = lat
+    this.lng = lng
     this.types = types
   }
 
-  static create (accused: Accused[], description: string, types: CrimeType[]) {
-    return new Crime(accused, description, types)
+  static create (accused: Accused[], description: string, occuredDate: Date, lat: string, lng: string, types: CrimeType[]) {
+    return new Crime(accused, description, occuredDate, lat, lng, types)
   }
 }

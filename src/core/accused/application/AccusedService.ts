@@ -15,4 +15,8 @@ export class AccusedService {
   async getById (id: string): Promise<Accused | undefined> {
     return await this.repository.getById(id)
   }
+
+  async getOne (): Promise<Accused | undefined> {
+    return await this.repository.getOne()
+  }
 }
