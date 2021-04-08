@@ -14,4 +14,4 @@ router.get('/:id', async (req: Request, res: Response) => {
   res.json({ data: subdivision || null })
 })
 
-export { router as subdivisionRouter }
+export { router as subdivisionsRouter }

@@ -1,7 +1,7 @@
 import { MigrationInterface } from 'typeorm'
 import { MongoQueryRunner } from 'typeorm/driver/mongodb/MongoQueryRunner'
 import { AccusedRepository } from '../src/core/accused/infra/AccusedRepository'
-import { MongoCrimeTypeRepository } from '../src/core/crime-types/infra/MongoCrimeTypeRepository'
+import { CrimeTypeRepository } from '../src/core/crime-types/infra/CrimeTypeRepository'
 import { Crime } from '../src/core/crimes/domain/Crime'
 import lacrimes from '../src/seed/lacrimes.json'
 
@@ -14,7 +14,7 @@ export class LoadCrimes1617880681747 implements MigrationInterface {
         crime.occurredDate,
         crime.lat,
         crime.lng,
-        MongoCrimeTypeRepository.getOne()
+        CrimeTypeRepository.getOne()
       )
 
       const result = await queryRunner.insertOne('crimes', row)

@@ -1,6 +1,6 @@
 import { CrimeTypeService } from './CrimeTypeService'
-import { MongoCrimeTypeRepository } from '../infra/MongoCrimeTypeRepository'
+import { CrimeTypeRepository } from '../infra/CrimeTypeRepository'
 
-const service = new CrimeTypeService(new MongoCrimeTypeRepository())
+const service = new CrimeTypeService(new CrimeTypeRepository())
 
-export { service as CrimeTypeService }
+export { service as crimeTypeService }

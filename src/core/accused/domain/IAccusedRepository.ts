@@ -1,7 +1,7 @@
 import { Accused } from './Accused'
 
 export interface IAccusedRepository {
-  getAll(): Promise<Accused[]>
+  getAll(filter: { country: string }): Promise<Accused[]>
   getById(id: string): Promise<Accused | undefined>
   getOne(): Promise<Accused | undefined>
 }
