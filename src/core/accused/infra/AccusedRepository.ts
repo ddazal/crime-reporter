@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm'
+import { getRepository, MongoRepository, Repository } from 'typeorm'
 import { Accused } from '../domain/Accused'
 import { IAccusedRepository } from '../domain/IAccusedRepository'
 
@@ -13,5 +13,13 @@ export class AccusedRepository extends Repository<Accused> implements IAccusedRe
 
   async getById (id: string): Promise<Accused | undefined> {
     return await getRepository(Accused).findOne(id)
+  }
+
+  async getMany (): Promise<Accused[] | []> {
+    const repo = getRepository(Accused) as MongoRepository<Accused>
+    const accused = await repo.aggregate<Accused>([
+      { $sample: { size: 2 } }
+    ]).toArray()
+    return accused
   }
 }
