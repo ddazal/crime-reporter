@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 import { accusedRouter } from './routes/accused'
 import { countriesRouter } from './routes/countries'
 import { crimesRouter } from './routes/crime'
@@ -12,5 +12,15 @@ v1Router.use('/countries', countriesRouter)
 v1Router.use('/accused', accusedRouter)
 v1Router.use('/subdivisions', subdivisionsRouter)
 v1Router.use('/types', typesRouter)
+
+v1Router.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.message)
+  console.error(err.stack)
+  res.json({
+    data: null,
+    error: err.message,
+    status: err.status || 500
+  })
+})
 
 export { v1Router }
