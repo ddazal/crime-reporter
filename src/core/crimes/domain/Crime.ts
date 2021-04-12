@@ -14,10 +14,10 @@ export class Crime {
   occuredDate!: Date
 
   @Column()
-  lat!: string
+  lat: string
 
   @Column()
-  lng!: string
+  lng: string
 
   @ManyToMany(accused => Accused)
   accused: Accused[];

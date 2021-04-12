@@ -15,4 +15,9 @@ router.get('/:id', async (req: Request, res: Response) => {
   res.json({ data: crime || null })
 })
 
+router.post('/', async (req: Request, res: Response) => {
+  const insertedId = await crimeService.createCrime(req.body)
+  res.json({ data: insertedId })
+})
+
 export { router as crimesRouter }

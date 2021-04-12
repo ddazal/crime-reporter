@@ -10,4 +10,9 @@ export class MongoCrimeRepository extends MongoRepository<Crime> implements ICri
   async getById (id: string): Promise<Crime | undefined> {
     return await getMongoRepository(Crime).findOne(id)
   }
+
+  async createCrime (data: Crime): Promise<String> {
+    const result = await getMongoRepository(Crime).insertOne(data)
+    return result.insertedId.toString()
+  }
 }

@@ -15,4 +15,8 @@ export class CrimeService {
   async findById (id: string): Promise<Crime | undefined> {
     return await this.repository.getById(id)
   }
+
+  async createCrime (data: Crime): Promise<String> {
+    return await this.repository.createCrime(data)
+  }
 }
