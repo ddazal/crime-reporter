@@ -3,6 +3,7 @@ import { v1Router } from './api/v1'
 
 const app = express()
 
+app.use(express.json())
 app.use('/api/v1', v1Router)
 
 app.get('/', (req: Request, res: Response) => {
