@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ObjectID, ObjectIdColumn } from 'typeorm'
+import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
 import { Accused } from '../../accused/domain/Accused'
 import { CrimeType } from '../../crime-types/domain/CrimeType'
 
@@ -11,30 +11,34 @@ export class Crime {
   description: string
 
   @Column()
-  occuredDate!: Date
+  occurredDate!: Date
 
   @Column()
-  lat: string
+  lat: number
 
   @Column()
-  lng: string
+  lng: number
 
-  @ManyToMany(accused => Accused)
-  accused: Accused[];
+  @Column(type => Accused)
+  accused!: Accused[];
 
-  @ManyToMany(types => CrimeType)
-  types: CrimeType[];
+  @Column(type => CrimeType)
+  types!: CrimeType[];
 
-  private constructor (accused: Accused[], description: string, occuredDate: Date, lat: string, lng: string, types: CrimeType[]) {
-    this.accused = accused
+  private constructor (description: string, occurredDate: Date, lat: number, lng: number, accused?: Accused[], types?: CrimeType[]) {
     this.description = description
-    this.occuredDate = occuredDate
+    this.occurredDate = occurredDate
     this.lat = lat
     this.lng = lng
-    this.types = types
+    if (accused) {
+      this.accused = accused
+    }
+    if (types) {
+      this.types = types
+    }
   }
 
-  static create (accused: Accused[], description: string, occuredDate: Date, lat: string, lng: string, types: CrimeType[]) {
-    return new Crime(accused, description, occuredDate, lat, lng, types)
+  static create (description: string, occurredDate: Date, lat: number, lng: number, accused?: Accused[], types?: CrimeType[]) {
+    return new Crime(description, occurredDate, lat, lng, accused, types)
   }
 }

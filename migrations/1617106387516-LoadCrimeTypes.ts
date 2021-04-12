@@ -6,12 +6,12 @@ import crimeTypes from '../src/seed/crime_types.json'
 export class LoadCrimeTypes1617106387516 implements MigrationInterface {
   public async up (queryRunner: MongoQueryRunner): Promise<void> {
     const crimeTypesData = crimeTypes.map(crimeType => CrimeType.create(crimeType.name))
-    const result = await queryRunner.insertMany('crime_types', crimeTypesData)
-    await queryRunner.createCollectionIndex('crime_types', { name: 1 })
+    const result = await queryRunner.insertMany('crimetypes', crimeTypesData)
+    await queryRunner.createCollectionIndex('crimetypes', { name: 1 })
     console.log(`${result.insertedCount} documents inserted.`)
   }
 
   public async down (queryRunner: MongoQueryRunner): Promise<void> {
-    await queryRunner.clearTable('crime_types')
+    await queryRunner.clearTable('crimetypes')
   }
 }

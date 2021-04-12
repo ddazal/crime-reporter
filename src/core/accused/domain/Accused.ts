@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, ObjectID, ObjectIdColumn } from 'typeorm'
+import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
 import { Subdivision } from '../../subdivisions/domain/Subdivision'
 
 @Entity('accused')
@@ -18,8 +18,7 @@ export class Accused {
   @Column()
   birthDate: string
 
-  @ManyToOne(() => Subdivision)
-  @JoinColumn()
+  @Column(type => Subdivision)
   birthPlace: Subdivision
 
   private constructor (firstName: string, lastName: string, gender: string, birthDate: string, birthPlace: Subdivision) {

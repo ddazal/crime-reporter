@@ -17,11 +17,11 @@ export class LoadCrimes1617880681747 implements MigrationInterface {
       const types = await typesService.getMany()
 
       const row = Crime.create(
-        accused,
         crime.description,
         new Date(crime.occurred_date),
-        crime.lat,
-        crime.lng,
+        +crime.lat,
+        +crime.lng,
+        accused,
         types
       )
 
