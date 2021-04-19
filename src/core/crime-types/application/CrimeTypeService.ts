@@ -16,7 +16,11 @@ export class CrimeTypeService {
     return this.repository.getMany()
   }
 
-  create (data: CrimeType): Promise<string> {
+  createCrimeType (data: CrimeType): Promise<string> {
     return this.repository.createCrimeType(data)
+  }
+
+  deleteCrimeType (id: string): Promise<boolean> {
+    return this.repository.deleteCrimeType(id)
   }
 }
