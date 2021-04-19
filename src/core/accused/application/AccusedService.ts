@@ -8,18 +8,22 @@ export class AccusedService {
     this.repository = repository
   }
 
-  async getAll (filter: { country: string }): Promise<Accused[]> {
+  getAll (filter: { country: string }): Promise<Accused[]> {
     if (filter.country) {
       filter.country = filter.country.toUpperCase()
     }
-    return await this.repository.getAll(filter)
+    return this.repository.getAll(filter)
   }
 
-  async getById (id: string): Promise<Accused | undefined> {
-    return await this.repository.getById(id)
+  getById (id: string): Promise<Accused | undefined> {
+    return this.repository.getById(id)
   }
 
-  async getMany (): Promise<Accused[]> {
-    return await this.repository.getMany()
+  getMany (): Promise<Accused[]> {
+    return this.repository.getMany()
+  }
+
+  deleteById (id: string): Promise<number | undefined> {
+    return this.repository.removeOne(id)
   }
 }

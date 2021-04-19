@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson'
 import { getMongoRepository, MongoRepository } from 'typeorm'
 import { Accused } from '../domain/Accused'
 import { IAccusedRepository } from '../domain/IAccusedRepository'
@@ -19,5 +20,10 @@ export class MongoAccusedRepository extends MongoRepository<Accused> implements 
     return await getMongoRepository(Accused).aggregate<Accused>([
       { $sample: { size: 2 } }
     ]).toArray()
+  }
+
+  async removeOne (id: string): Promise<number | undefined> {
+    const op = await getMongoRepository(Accused).deleteOne({ _id: new ObjectId(id) })
+    return op.deletedCount
   }
 }

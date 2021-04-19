@@ -16,10 +16,11 @@ v1Router.use('/types', typesRouter)
 v1Router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.message)
   console.error(err.stack)
-  res.json({
+  const status = err.status || 500
+  res.status(status).json({
     data: null,
     error: err.message,
-    status: err.status || 500
+    status
   })
 })
 

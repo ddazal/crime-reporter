@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { accusedService } from '../../core/accused/application'
+import { ApiError } from '../../utils/error'
 
 const router = Router()
 
@@ -18,6 +19,19 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params
     const accused = await accusedService.getById(id)
     res.json({ data: accused || null })
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params
+    const result = await accusedService.deleteById(id)
+    if (!result) {
+      return next(new ApiError('Accused not found', 404))
+    }
+    res.json({ data: 'Accused deleted' })
   } catch (error) {
     next(error)
   }
