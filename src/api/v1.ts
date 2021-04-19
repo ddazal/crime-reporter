@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express'
+import { ApiError } from '../utils/error'
 import { accusedRouter } from './routes/accused'
 import { countriesRouter } from './routes/countries'
 import { crimesRouter } from './routes/crime'
@@ -12,6 +13,10 @@ v1Router.use('/countries', countriesRouter)
 v1Router.use('/accused', accusedRouter)
 v1Router.use('/subdivisions', subdivisionsRouter)
 v1Router.use('/types', typesRouter)
+
+v1Router.use((req: Request, res: Response, next: NextFunction) => {
+  return next(new ApiError('Resource not found', 404))
+})
 
 v1Router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (process.env.NODE_ENV !== 'production') {

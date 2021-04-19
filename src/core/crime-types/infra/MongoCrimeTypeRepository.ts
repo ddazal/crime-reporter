@@ -12,4 +12,9 @@ export class MongoCrimeTypeRepository extends MongoRepository<CrimeType> impleme
       { $sample: { size: 2 } }
     ]).toArray()
   }
+
+  async createCrimeType (data: CrimeType): Promise<string> {
+    const result = await getMongoRepository(CrimeType).insertOne(data)
+    return result.insertedId.toString()
+  }
 }

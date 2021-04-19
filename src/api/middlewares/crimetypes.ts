@@ -3,11 +3,10 @@ import Joi from 'joi'
 import { ApiError } from '../../utils/error'
 
 const schema = Joi.object({
-  name: Joi.string(),
-  code: Joi.string().length(2)
-}).min(1).unknown(false)
+  name: Joi.string().required()
+}).unknown(false)
 
-function validateCountrySchema (req: Request, res: Response, next: NextFunction) {
+function validateCrimeTypeSchema (req: Request, res: Response, next: NextFunction) {
   const { error } = schema.validate(req.body || {})
   if (error) {
     return next(new ApiError(error.message, 400))
@@ -15,4 +14,4 @@ function validateCountrySchema (req: Request, res: Response, next: NextFunction)
   next()
 }
 
-export { validateCountrySchema }
+export { validateCrimeTypeSchema }

@@ -8,11 +8,15 @@ export class CrimeTypeService {
     this.repository = repository
   }
 
-  async getAll (): Promise<CrimeType[]> {
-    return await this.repository.getAll()
+  getAll (): Promise<CrimeType[]> {
+    return this.repository.getAll()
   }
 
-  async getMany (): Promise<CrimeType[]> {
-    return await this.repository.getMany()
+  getMany (): Promise<CrimeType[]> {
+    return this.repository.getMany()
+  }
+
+  create (data: CrimeType): Promise<string> {
+    return this.repository.createCrimeType(data)
   }
 }
