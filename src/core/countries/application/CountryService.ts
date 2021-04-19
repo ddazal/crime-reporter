@@ -9,15 +9,19 @@ export class CountryService {
     this.repository = repository
   }
 
-  async getAll (): Promise<Country[]> {
-    return await this.repository.getAll()
+  getAll (): Promise<Country[]> {
+    return this.repository.getAll()
   }
 
-  async getByCode (code: string): Promise<Country | undefined> {
-    return await this.repository.getByCode(code)
+  getByCode (code: string): Promise<Country | undefined> {
+    return this.repository.getByCode(code)
   }
 
-  async getSubdivisions (code: string): Promise<Subdivision[]> {
-    return await this.repository.getSubdivisions(code)
+  getSubdivisions (code: string): Promise<Subdivision[]> {
+    return this.repository.getSubdivisions(code)
+  }
+
+  updateCountry (id: string, data: Country): Promise<number> {
+    return this.repository.updateCountry(id, data)
   }
 }
