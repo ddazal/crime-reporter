@@ -32,12 +32,14 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.4",
+    "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/mongodb": "^3.6.8",
+    "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.25",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",

@@ -1,9 +1,11 @@
 import express, { Request, Response } from 'express'
+import morgan from 'morgan'
 import { v1Router } from './api/v1'
 
 const app = express()
 
 app.use(express.json())
+app.use(morgan('dev'))
 app.use('/api/v1', v1Router)
 
 app.get('/', (req: Request, res: Response) => {
