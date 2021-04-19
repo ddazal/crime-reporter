@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { countryService } from '../../core/countries/application'
 import { ApiError } from '../../utils/error'
+import { validateSchema } from '../middlewares/country'
 
 const router = Router()
 
@@ -33,7 +34,7 @@ router.get('/:code/subdivisions', async (req: Request, res: Response, next: Next
   }
 })
 
-router.patch('/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/:id', validateSchema, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const result = await countryService.updateCountry(id, req.body)

@@ -14,8 +14,10 @@ v1Router.use('/subdivisions', subdivisionsRouter)
 v1Router.use('/types', typesRouter)
 
 v1Router.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.message)
-  console.error(err.stack)
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err.message)
+    console.error(err.stack)
+  }
   const status = err.status || 500
   res.status(status).json({
     data: null,

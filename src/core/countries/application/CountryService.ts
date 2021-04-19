@@ -21,7 +21,7 @@ export class CountryService {
     return this.repository.getSubdivisions(code)
   }
 
-  updateCountry (id: string, data: Country): Promise<number> {
+  updateCountry (id: string, data: Country): Promise<boolean> {
     return this.repository.updateCountry(id, data)
   }
 }
