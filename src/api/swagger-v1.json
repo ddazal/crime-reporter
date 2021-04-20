@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Crime Reporter",
     "contact": {
-      "email": "apiteam@swagger.io"
+      "email": "hola@ddazal.com"
     },
     "license": {
       "name": "MIT",
@@ -154,7 +154,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Subdivision"
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  }
+                }
               }
             }
           },
@@ -166,9 +176,108 @@
           }
         }
       }
+    },
+    "/accused": {
+      "get": {
+        "tags": [
+          "accused"
+        ],
+        "summary": "Get all accused",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Accused"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accused/{id}": {
+      "get": {
+        "tags": [
+          "accused"
+        ],
+        "summary": "Get accused by id",
+        "parameters": [
+          {
+            "in": "path",
+            "type": "string",
+            "name": "id",
+            "required": true,
+            "description": "Accused id"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "$ref": "#/definitions/Accused"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "accused"
+        ],
+        "summary": "Delete accused by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Accused id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Succesful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Accused": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string"
+        },
+        "birthPlace": {
+          "$ref": "#/definitions/Subdivision"
+        }
+      }
+    },
     "Country": {
       "type": "object",
       "properties": {
@@ -180,7 +289,7 @@
         },
         "code": {
           "type": "string",
-          "description": "ISO 3166 alpha-2 country code"
+          "description": "ISO formatted code"
         }
       }
     },
@@ -195,6 +304,9 @@
         },
         "level": {
           "type": "string"
+        },
+        "country": {
+          "$ref": "#/definitions/Country"
         }
       }
     },

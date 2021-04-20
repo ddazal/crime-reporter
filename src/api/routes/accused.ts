@@ -18,7 +18,10 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const accused = await accusedService.getById(id)
-    res.json({ data: accused || null })
+    if (!accused) {
+      return next(new ApiError('Accused not found', 404))
+    }
+    res.json({ data: accused })
   } catch (error) {
     next(error)
   }
@@ -31,7 +34,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
     if (!result) {
       return next(new ApiError('Accused not found', 404))
     }
-    res.json({ data: 'Accused deleted' })
+    res.status(204).end()
   } catch (error) {
     next(error)
   }
