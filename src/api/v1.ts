@@ -5,9 +5,12 @@ import { countriesRouter } from './routes/countries'
 import { crimesRouter } from './routes/crime'
 import { typesRouter } from './routes/crimetypes'
 import { subdivisionsRouter } from './routes/subdivisions'
+import { serve, setup } from 'swagger-ui-express'
+import swaggerDoc from './swagger-v1.json'
 
 const v1Router = Router()
 
+v1Router.use('/docs', serve, setup(swaggerDoc))
 v1Router.use('/crimes', crimesRouter)
 v1Router.use('/countries', countriesRouter)
 v1Router.use('/accused', accusedRouter)

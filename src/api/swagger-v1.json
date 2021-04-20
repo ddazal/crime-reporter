@@ -1,0 +1,211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Crime Reporter API is a REST API for CRUD operations over world crime data. You will have access to information about crimes, crime types, accused, countries and subdivisions.",
+    "version": "1.0.0",
+    "title": "Crime Reporter",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ddazal/crime-reporter/blob/main/LICENSE"
+    }
+  },
+  "host": "localhost:3030",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "countries",
+      "description": "Countries operations"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Get all countries",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{code}": {
+      "get": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Get a country by country code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "ISO 3166 alpha-2 country code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "$ref": "#/definitions/Country"
+            }
+          },
+          "404": {
+            "description": "Country not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Update country information",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "ISO 3166 alpha-2 country code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Succesful operation"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/{code}/subdivisions": {
+      "get": {
+        "tags": [
+          "countries"
+        ],
+        "summary": "Get subdivisions of a country",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "ISO 3166 alpha-2 country code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subdivision"
+              }
+            }
+          },
+          "404": {
+            "description": "Country not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Country": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string",
+          "description": "ISO 3166 alpha-2 country code"
+        }
+      }
+    },
+    "Subdivision": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

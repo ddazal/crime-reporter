@@ -11,6 +11,7 @@ app.use('/api/v1', v1Router)
 app.get('/', (req: Request, res: Response) => {
   const baseUrl = `${req.baseUrl}/api/v1`
   res.status(200).json({
+    docs: getRelativeURL(baseUrl, 'docs'),
     crimes: getRelativeURL(baseUrl, 'crimes'),
     countries: getRelativeURL(baseUrl, 'countries'),
     accused: getRelativeURL(baseUrl, 'accused'),
