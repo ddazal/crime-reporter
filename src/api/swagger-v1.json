@@ -16,15 +16,17 @@
   "basePath": "/api/v1",
   "tags": [
     {
-      "name": "countries",
-      "description": "Countries operations"
+      "name": "countries"
+    },
+    {
+      "name": "accused"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/": {
+    "/countries": {
       "get": {
         "tags": [
           "countries"
@@ -46,7 +48,7 @@
         }
       }
     },
-    "/{code}": {
+    "/countries/{code}": {
       "get": {
         "tags": [
           "countries"
@@ -128,7 +130,7 @@
         }
       }
     },
-    "/{code}/subdivisions": {
+    "/countries/{code}/subdivisions": {
       "get": {
         "tags": [
           "countries"
