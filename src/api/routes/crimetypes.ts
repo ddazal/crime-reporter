@@ -23,6 +23,19 @@ router.post('/', validateCrimeTypeSchema, async (req: Request, res: Response, ne
   }
 })
 
+router.patch('/:id', validateCrimeTypeSchema, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params
+    const result = await crimeTypeService.updateCrimeType(id, req.body)
+    if (!result) {
+      return next(new ApiError('Crime type was not updated. Maybe the id is wrong?', 404))
+    }
+    res.status(204).end()
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params

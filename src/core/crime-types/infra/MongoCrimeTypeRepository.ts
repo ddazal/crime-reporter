@@ -23,4 +23,9 @@ export class MongoCrimeTypeRepository extends MongoRepository<CrimeType> impleme
     const op = await getMongoRepository(CrimeType).deleteOne({ _id: new ObjectId(id) })
     return !!op.deletedCount
   }
+
+  async updateCrimeType (id: string, data: CrimeType): Promise<boolean> {
+    const op = await getMongoRepository(CrimeType).updateOne({ _id: new ObjectId(id) }, { $set: data })
+    return !!op.matchedCount && !!op.modifiedCount
+  }
 }

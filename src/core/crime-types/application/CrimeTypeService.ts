@@ -23,4 +23,8 @@ export class CrimeTypeService {
   deleteCrimeType (id: string): Promise<boolean> {
     return this.repository.deleteCrimeType(id)
   }
+
+  updateCrimeType (id: string, data: CrimeType): Promise<boolean> {
+    return this.repository.updateCrimeType(id, data)
+  }
 }
