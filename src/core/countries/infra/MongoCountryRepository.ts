@@ -1,4 +1,3 @@
-import { ObjectId } from 'bson'
 import { getMongoRepository, MongoRepository } from 'typeorm'
 import { Subdivision } from '../../subdivisions/domain/Subdivision'
 import { Country } from '../domain/Country'
@@ -14,11 +13,11 @@ export class MongoCountryRepository extends MongoRepository<Country> implements 
   }
 
   async getSubdivisions (code: string): Promise<Subdivision[]> {
-    return await getMongoRepository(Subdivision).find({ where: { 'country.code': code } })
+    return await getMongoRepository(Subdivision).find({ where: { 'country.code': code }, select: ['id', 'name', 'code', 'level'] })
   }
 
-  async updateCountry (id: string, data: Country): Promise<boolean> {
-    const op = await getMongoRepository(Country).updateOne({ _id: new ObjectId(id) }, { $set: data })
+  async updateCountry (code: string, data: Country): Promise<boolean> {
+    const op = await getMongoRepository(Country).updateOne({ code }, { $set: data })
     return !!op.matchedCount && !!op.modifiedCount
   }
 }

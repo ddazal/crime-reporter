@@ -18,6 +18,9 @@ router.get('/:code', async (req: Request, res: Response, next: NextFunction) => 
   try {
     const { code } = req.params
     const country = await countryService.getByCode(code.toUpperCase())
+    if (!country) {
+      return next(new ApiError('Country not found', 404))
+    }
     res.json({ data: country || null })
   } catch (error) {
     next(error)
@@ -28,16 +31,19 @@ router.get('/:code/subdivisions', async (req: Request, res: Response, next: Next
   try {
     const { code } = req.params
     const subdivisions = await countryService.getSubdivisions(code.toUpperCase())
+    if (!subdivisions.length) {
+      return next(new ApiError('Country not found', 404))
+    }
     res.json({ data: subdivisions })
   } catch (error) {
     next(error)
   }
 })
 
-router.patch('/:id', validateCountrySchema, async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/:code', validateCountrySchema, async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params
-    const result = await countryService.updateCountry(id, req.body)
+    const { code } = req.params
+    const result = await countryService.updateCountry(code.toUpperCase(), req.body)
     if (!result) {
       return next(new ApiError('Country not found', 404))
     }

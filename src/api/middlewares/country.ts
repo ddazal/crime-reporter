@@ -12,6 +12,9 @@ function validateCountrySchema (req: Request, res: Response, next: NextFunction)
   if (error) {
     return next(new ApiError(error.message, 400))
   }
+  if (req.body.code) {
+    req.body.code = req.body.code.toUpperCase()
+  }
   next()
 }
 
