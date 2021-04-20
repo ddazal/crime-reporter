@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Crime Reporter",
     "contact": {
-      "email": "hola@ddazal.com"
+      "email": "apiteam@swagger.io"
     },
     "license": {
       "name": "MIT",
@@ -20,6 +20,9 @@
     },
     {
       "name": "accused"
+    },
+    {
+      "name": "crimetypes"
     }
   ],
   "schemes": [
@@ -252,6 +255,129 @@
           }
         }
       }
+    },
+    "/types": {
+      "get": {
+        "tags": [
+          "crimetypes"
+        ],
+        "summary": "Get all crime types",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CrimeType"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "crimetypes"
+        ],
+        "summary": "Create new crime type",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Succesful operation",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/types/{id}": {
+      "delete": {
+        "tags": [
+          "crimetypes"
+        ],
+        "summary": "Delete crime type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Succesful operation"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "crimetypes"
+        ],
+        "summary": "Update crime type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Succesful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -307,6 +433,17 @@
         },
         "country": {
           "$ref": "#/definitions/Country"
+        }
+      }
+    },
+    "CrimeType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
