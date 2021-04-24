@@ -17,7 +17,12 @@ export class MongoCountryRepository extends MongoRepository<Country> implements 
   }
 
   async updateCountry (code: string, data: Country): Promise<boolean> {
-    const op = await getMongoRepository(Country).updateOne({ code }, { $set: data })
+    const searchCode = code.toUpperCase()
+    const updateData = data
+    if (updateData.code) {
+      updateData.code = updateData.code.toUpperCase()
+    }
+    const op = await getMongoRepository(Country).updateOne({ code: searchCode }, { $set: updateData })
     return !!op.matchedCount && !!op.modifiedCount
   }
 }

@@ -1,7 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { countryService } from '../../core/countries/application'
-import { ApiError } from '../../utils/error'
-import { validateCountrySchema } from '../middlewares/country'
+import { Country } from '../../core/countries/domain/Country'
+import { ApiError } from '../utils/error'
+import { useSchema } from '../utils/validate'
 
 const router = Router()
 
@@ -40,10 +41,10 @@ router.get('/:code/subdivisions', async (req: Request, res: Response, next: Next
   }
 })
 
-router.patch('/:code', validateCountrySchema, async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/:code', useSchema(Country.schema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { code } = req.params
-    const result = await countryService.updateCountry(code.toUpperCase(), req.body)
+    const result = await countryService.updateCountry(code, req.body)
     if (!result) {
       return next(new ApiError('Country not found', 404))
     }

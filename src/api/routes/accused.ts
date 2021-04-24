@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { accusedService } from '../../core/accused/application'
-import { ApiError } from '../../utils/error'
+import { ApiError } from '../utils/error'
 
 const router = Router()
 

@@ -1,7 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { crimeTypeService } from '../../core/crime-types/application/'
-import { ApiError } from '../../utils/error'
-import { validateCrimeTypeSchema } from '../middlewares/crimetypes'
+import { CrimeType } from '../../core/crime-types/domain/CrimeType'
+import { ApiError } from '../utils/error'
+import { useSchema } from '../utils/validate'
 
 const router = Router()
 
@@ -14,7 +15,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   }
 })
 
-router.post('/', validateCrimeTypeSchema, async (req: Request, res: Response, next: NextFunction) => {
+router.post('/', useSchema(CrimeType.schema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const insertedId = await crimeTypeService.createCrimeType(req.body)
     res.status(201).json({ data: { id: insertedId } })
@@ -23,7 +24,7 @@ router.post('/', validateCrimeTypeSchema, async (req: Request, res: Response, ne
   }
 })
 
-router.patch('/:id', validateCrimeTypeSchema, async (req: Request, res: Response, next: NextFunction) => {
+router.patch('/:id', useSchema(CrimeType.schema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
     const result = await crimeTypeService.updateCrimeType(id, req.body)
