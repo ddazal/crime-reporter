@@ -2,6 +2,8 @@ import { Router, Request, Response, NextFunction } from 'express'
 import { crimeService } from '../../core/crimes/application'
 import { ApiError } from '../utils/error'
 import { getParams } from '../params'
+import { useSchema } from '../utils/validate'
+import { Country } from '../../core/countries/domain/Country'
 
 const router = Router()
 
@@ -27,10 +29,10 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   }
 })
 
-router.post('/', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/', useSchema(Country.schema), async (req: Request, res: Response, next: NextFunction) => {
   try {
     const insertedId = await crimeService.createCrime(req.body)
-    res.json({ data: insertedId })
+    res.status(201).json({ data: { id: insertedId } })
   } catch (error) {
     next(error)
   }

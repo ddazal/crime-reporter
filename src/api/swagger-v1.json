@@ -16,10 +16,13 @@
   "basePath": "/api/v1",
   "tags": [
     {
+      "name": "accused"
+    },
+    {
       "name": "countries"
     },
     {
-      "name": "accused"
+      "name": "crimes"
     },
     {
       "name": "crimetypes"
@@ -342,7 +345,10 @@
             "description": "Succesful operation"
           },
           "404": {
-            "description": "Crime type not found"
+            "description": "Crime type not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       },
@@ -429,7 +435,115 @@
             }
           },
           "404": {
-            "description": "Subdivision not found"
+            "description": "Subdivision not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/crimes": {
+      "get": {
+        "tags": [
+          "crimes"
+        ],
+        "summary": "Get crimes",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Crime"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "crimes"
+        ],
+        "summary": "Create a crime",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Crime information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "number"
+                },
+                "lng": {
+                  "type": "number"
+                },
+                "occurredDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/crimes/{id}": {
+      "get": {
+        "tags": [
+          "crimes"
+        ],
+        "summary": "Get crime by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "$ref": "#/definitions/Crime"
+            }
+          },
+          "404": {
+            "description": "Crime not found",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         }
       }
@@ -499,6 +613,38 @@
         },
         "name": {
           "type": "string"
+        }
+      }
+    },
+    "Crime": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "occurredDate": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "accused": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Accused"
+          }
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CrimeType"
+          }
         }
       }
     },
