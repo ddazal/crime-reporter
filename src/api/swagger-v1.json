@@ -23,6 +23,9 @@
     },
     {
       "name": "crimetypes"
+    },
+    {
+      "name": "subdivisions"
     }
   ],
   "schemes": [
@@ -228,7 +231,7 @@
             }
           },
           "404": {
-            "description": "Not found",
+            "description": "Accused not found",
             "schema": {
               "$ref": "#/definitions/ApiError"
             }
@@ -339,7 +342,7 @@
             "description": "Succesful operation"
           },
           "404": {
-            "description": "Not found"
+            "description": "Crime type not found"
           }
         }
       },
@@ -375,6 +378,58 @@
         "responses": {
           "204": {
             "description": "Succesful operation"
+          }
+        }
+      }
+    },
+    "/subdivisions": {
+      "get": {
+        "tags": [
+          "subdivisions"
+        ],
+        "summary": "Get all subdivisions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subdivision"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subdivisions/{id}": {
+      "get": {
+        "tags": [
+          "subdivisions"
+        ],
+        "summary": "Get subdivision by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful operation",
+            "schema": {
+              "$ref": "#/definitions/Subdivision"
+            }
+          },
+          "404": {
+            "description": "Subdivision not found"
           }
         }
       }
