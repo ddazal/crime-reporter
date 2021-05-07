@@ -18,6 +18,6 @@ CMD [ “npm”, “start” ]
 
 FROM base as development
 
-RUN npm run seed
+RUN npm run migrate:up
 
 CMD [ "npm", "run", "dev" ]
