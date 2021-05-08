@@ -1,4 +1,4 @@
-FROM node:12-alpine as base
+FROM node:12-alpine
 
 WORKDIR /usr/src/app
 
@@ -9,15 +9,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 3030
-
-FROM base as production
-
-ENV NODE_ENV=production
-
-CMD [ “npm”, “start” ]
-
-FROM base as development
-
-RUN npm run seed
 
 CMD [ "npm", "run", "dev" ]
