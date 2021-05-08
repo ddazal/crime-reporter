@@ -10,4 +10,6 @@ COPY . .
 
 EXPOSE 3030
 
+RUN npm run migrate:up
+
 CMD [ "npm", "run", "dev" ]

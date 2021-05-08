@@ -6,7 +6,7 @@ import http from 'http'
 import { app } from './app'
 import { createConnection } from 'typeorm'
 
-const port = process.env.PORT
+const port = 3030
 const server = http.createServer(app)
 
 createConnection().then(connection => {
